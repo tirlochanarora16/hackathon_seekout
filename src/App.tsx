@@ -1,8 +1,11 @@
 import React from 'react';
+import SeekoutLogo from "./components/SeekoutLogo"
 
 function App() {
   return (
-    <h1 className='font-bold'>Hello world</h1>
+    <div className=''>
+      <SeekoutLogo />
+    </div>
   );
 }
 
