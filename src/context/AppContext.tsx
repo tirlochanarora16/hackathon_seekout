@@ -1,10 +1,13 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { getAllDecks } from "../api/DeckService";
 
 interface IAppContext {
   selectedRole: string | null;
   setSelectedRole: (role: string | null) => void;
   currentScreen: string;
   setCurrentScreen: (screen: string) => void;
+  decks: any;
+  setDecks: (decks: any) => void;
 }
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
@@ -16,10 +19,27 @@ interface AppProviderProps {
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [currentScreen, setCurrentScreen] = useState<string>("SelectRole");
+  const [decks, setDecks] = useState<any>(null);
+
+  const fetchDecks = async () => {
+    const response = await getAllDecks();
+    setDecks(response);
+  };
+
+  useEffect(() => {
+    fetchDecks();
+  }, []);
 
   return (
     <AppContext.Provider
-      value={{ selectedRole, setSelectedRole, currentScreen, setCurrentScreen }}
+      value={{
+        selectedRole,
+        setSelectedRole,
+        currentScreen,
+        setCurrentScreen,
+        decks,
+        setDecks,
+      }}
     >
       {children}
     </AppContext.Provider>

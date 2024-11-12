@@ -9,7 +9,7 @@ const SelectTemplate = () => {
     <div className="mx-4">
       {/* if we have existing templated available */}
       <Title
-        text="Create a new template"
+        text="Create a new Deck"
         className="text-vanilla text-[28px]"
       />
       <button
