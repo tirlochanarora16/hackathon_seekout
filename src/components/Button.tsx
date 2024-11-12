@@ -7,14 +7,14 @@ interface Iprops {
   onClick?: () => void;
 }
 
-const Button: React.FC<Iprops> = ({ text, type, disabled, onClick }) => {
+const Button: React.FC<Iprops> = ({ text, type, disabled = false, onClick }) => {
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
       className={`bg-indigo w-full p-4 rounded-md ${
-        disabled ? "bg-gray text-black cursor-not-allowed" : "bg-indigo"
+        disabled ? "bg-gray text-black cursor-not-allowed" : "bg-indigo text-vanilla"
       }`}
     >
       {text}
