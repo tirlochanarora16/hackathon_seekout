@@ -1,10 +1,9 @@
-import React from 'react';
-import SeekoutLogo from "./components/SeekoutLogo"
+import SelectRole from "./components/SelectRole";
 
 function App() {
   return (
-    <div className=''>
-      <SeekoutLogo />
+    <div className="">
+      <SelectRole />
     </div>
   );
 }
