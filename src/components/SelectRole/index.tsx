@@ -1,7 +1,6 @@
 import { useAppContext } from "../../context/AppContext";
 import Button from "../Button";
 import CustomRadio from "../CustomRadio";
-import SeekoutLogo from "../SeekoutLogo";
 import Title from "../Title";
 
 const ROLES_LIST = [
@@ -29,7 +28,6 @@ const SelectRole = () => {
 
   return (
     <div className="flex flex-col items-center text-vanilla">
-      <SeekoutLogo />
       <Title text="Which role are you hiring for?" />
       <div className="mt-10 w-full px-4">
         <form className="w-full flex flex-col items-center gap-5">
