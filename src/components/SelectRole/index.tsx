@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useAppContext } from "../../context/AppContext";
+import Button from "../Button";
 import CustomRadio from "../CustomRadio";
 import SeekoutLogo from "../SeekoutLogo";
-import Button from "../Button";
 import Title from "../Title";
 
 const ROLES_LIST = [
@@ -20,7 +20,7 @@ const ROLES_LIST = [
 ];
 
 const SelectRole = () => {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const { selectedRole, setSelectedRole } = useAppContext();
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSelectedRole(e.target.value);
