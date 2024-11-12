@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modal";
 import Title from "../Title";
 import Input from "../Input";
@@ -42,6 +42,8 @@ const INPUT_FIELDS = [
   },
 ];
 
+const requiredFields = INPUT_FIELDS.filter((input) => input.required);
+
 const initalState = INPUT_FIELDS.reduce(
   (acc, input) => ({ ...acc, [input.id]: "" }),
   {}
@@ -49,6 +51,7 @@ const initalState = INPUT_FIELDS.reduce(
 
 const SelectTemplate = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [btnDisable, setBtnDisable] = useState(true);
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>(
     initalState
   );
@@ -62,9 +65,26 @@ const SelectTemplate = () => {
 
     setInputValues((prev) => ({
       ...prev,
-      [e.target.id]: e.target.value,
+      [e.target.id]: e.target.value.trim(),
     }));
   };
+
+  useEffect(() => {
+    const values = Object.entries(inputValues).map(item => item[1].trim() !== "" ? item[0] : null);
+
+    console.log(values);
+
+    const allRequiredFields = requiredFields.every((field) =>
+      values.includes(field.id)
+    );
+
+    if (allRequiredFields) {
+        setBtnDisable(false);
+    } else {
+        setBtnDisable(true);
+    }
+
+  }, [inputValues]);
 
   return (
     <div className="mx-4">
@@ -95,7 +115,7 @@ const SelectTemplate = () => {
                 />
               );
             })}
-            <Button text="Create" type="submit" />
+            <Button text="Create" type="submit" disabled={btnDisable} />
           </form>
         </Modal>
       ) : null}
