@@ -3,19 +3,24 @@ import React, { createContext, useContext, useState } from "react";
 interface IAppContext {
   selectedRole: string | null;
   setSelectedRole: (role: string | null) => void;
+  currentScreen: string;
+  setCurrentScreen: (screen: string) => void;
 }
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
 
 interface AppProviderProps {
-    children: React.ReactNode;
-  }
+  children: React.ReactNode;
+}
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const [currentScreen, setCurrentScreen] = useState<string>("SelectRole");
 
   return (
-    <AppContext.Provider value={{ selectedRole, setSelectedRole }}>
+    <AppContext.Provider
+      value={{ selectedRole, setSelectedRole, currentScreen, setCurrentScreen }}
+    >
       {children}
     </AppContext.Provider>
   );

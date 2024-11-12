@@ -20,12 +20,12 @@ const ROLES_LIST = [
 ];
 
 const SelectRole = () => {
-  const { selectedRole, setSelectedRole } = useAppContext();
+  const { selectedRole, setSelectedRole, setCurrentScreen } = useAppContext();
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSelectedRole(e.target.value);
 
-  const handleBtnClick = () => {};
+  const handleBtnClick = () => setCurrentScreen("SelectTemplate");
 
   return (
     <div className="flex flex-col items-center text-vanilla">
