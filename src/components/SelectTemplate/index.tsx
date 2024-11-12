@@ -6,42 +6,60 @@ import Button from "../Button";
 
 const INPUT_FIELDS = [
   {
-    id: "languages",
-    label: "Languages",
+    id: "companyName",
+    label: "Company Name",
     type: "text",
-    placeholder: "Languages",
+    placeholder: "Company Name",
     required: true,
   },
   {
-    id: "frameworks",
-    label: "Frameworks",
-    type: "text",
-    placeholder: "Frameworks",
+    id: "roleId",
+    label: "Role Id",
+    type: "number",
+    placeholder: "Role Id",
     required: true,
   },
   {
-    id: "libraries",
-    label: "Libraries",
+    id: "companyDetails",
+    label: "Company Details",
     type: "text",
-    placeholder: "Libraries",
-    required: true,
+    placeholder: "Company Details",
+    required: false,
   },
   {
-    id: "tools",
-    label: "Tools",
+    id: "fundingStatus",
+    label: "Funding Status",
     type: "text",
-    placeholder: "Tools",
-    required: true,
+    placeholder: "Funding Status",
+    required: false,
+  },
+  {
+    id: "teamDetails",
+    label: "Team Details",
+    type: "text",
+    placeholder: "Team Details",
+    required: false,
   },
 ];
+
+const initalState = INPUT_FIELDS.reduce(
+  (acc, input) => ({ ...acc, [input.id]: "" }),
+  {}
+);
 
 const SelectTemplate = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>(
-    INPUT_FIELDS.reduce((acc, input) => ({ ...acc, [input.id]: "" }), {})
+    initalState
   );
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (
+      (e.target.id === "roleId" && isNaN(Number(e.target.value)))
+    ) {
+      return;
+    }
+
     setInputValues((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
@@ -60,7 +78,12 @@ const SelectTemplate = () => {
         +
       </button>
       {isModalOpen ? (
-        <Modal onClose={() => setIsModalOpen(false)}>
+        <Modal
+          onClose={() => {
+            setIsModalOpen(false);
+            setInputValues(initalState);
+          }}
+        >
           <form className="flex flex-col gap-5">
             {INPUT_FIELDS.map((input) => {
               return (

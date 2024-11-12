@@ -1,5 +1,9 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "https://tiny-experts-cry.loca.lt/",
+  baseURL: "http://localhost:3001",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
 });
